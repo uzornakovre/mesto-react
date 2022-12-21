@@ -1,15 +1,15 @@
-import React from 'react';
-import Header from './Header.js';
-import Main from './Main.js';
-import Footer from './Footer.js';
-import PopupWithForm from './PopupWithForm.js';
+import React          from 'react';
+import Header         from './Header.js';
+import Main           from './Main.js';
+import Footer         from './Footer.js';
+import PopupWithForm  from './PopupWithForm.js';
 import PopupWithImage from './PopupWithImage.js';
 
 function App() {
 
   const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
-  const [isAddPlacePopupOpen,    setAddPlacePopupState]    = React.useState(false);
-  const [isEditAvatarPopupOpen,  setEditAvatarPopupState]  = React.useState(false);
+  const [isAddPlacePopupOpen,    setAddPlacePopupState   ] = React.useState(false);
+  const [isEditAvatarPopupOpen,  setEditAvatarPopupState ] = React.useState(false);
 
   function handleEditAvatarClick() {
     setEditAvatarPopupState(!isEditAvatarPopupOpen);

@@ -1,22 +1,38 @@
 import React from 'react';
+import api from '../utils/api';
 
 function Main(props) {
+
+  const [userName,        setUserName       ] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
+  const [userAvatar,      setUserAvatar     ] = React.useState('');
+
+  api.getUserInfo()
+    .then((userData) => {
+      setUserName(userData.name);
+      setUserDescription(userData.about);
+      setUserAvatar(userData.avatar);
+    })
+    .catch((error) => {
+      console.log(`Ошибка при получении данных о пользователе: ${error}`);
+    });
+
   return (
     <main className="content">
         <section className="profile">
           <div className="profile__avatar-container"
                onClick={props.onEditAvatar}
           >
-            <img className="profile__avatar" src="#" alt="Аватар" />
+            <img className="profile__avatar" src={userAvatar} alt="Аватар" />
           </div>
           <div className="profile__info">
-            <h1 className="profile__name">Жак Ив Кусто</h1>
+            <h1 className="profile__name">{userName}</h1>
             <button className="profile__button-edit" 
                     type="button"
                     onClick={props.onEditProfile}
             >
             </button>
-            <p className="profile__job">Исследователь океана</p>
+            <p className="profile__job">{userDescription}</p>
           </div>
           <button className="profile__button-add" 
                   type="button"
