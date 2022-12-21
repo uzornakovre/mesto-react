@@ -29,6 +29,12 @@ function App() {
       setEditAvatarPopupState(false);
   }
 
+  // function handleEscClick(evt) {
+  //   if (evt.key === 'Escape') {
+  //     closeAllPopups();
+  //   }
+  // }
+
   return (
     <>
       <Header />
