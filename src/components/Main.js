@@ -7,15 +7,17 @@ function Main(props) {
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar,      setUserAvatar     ] = React.useState('');
 
-  api.getUserInfo()
-    .then((userData) => {
-      setUserName(userData.name);
-      setUserDescription(userData.about);
-      setUserAvatar(userData.avatar);
-    })
-    .catch((error) => {
-      console.log(`Ошибка при получении данных о пользователе: ${error}`);
-    });
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then((userData) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+      })
+      .catch((error) => {
+        console.log(`Ошибка при получении данных о пользователе: ${error}`);
+      });
+  });
 
   return (
     <main className="content">
