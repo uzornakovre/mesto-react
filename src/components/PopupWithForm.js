@@ -6,26 +6,10 @@ function PopupWithForm(props) {
   React.useEffect(() => {
     if (props.isOpen) {
       setPopupState('popup_opened');
-      // document.addEventListener('keydown', props.onCloseByEsc);
     } else {
       setPopupState('');
-      // document.removeEventListener('keydown', props.onCloseByEsc);
     }
   });
-
-  // React.useEffect(() => {
-  //   function handleOverlayClick(evt) {
-  //     if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close')) {
-  //       props.onClose();
-  //     }
-  //   }
-
-  //   document.addEventListener('mousedown', handleOverlayClick);
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleOverlayClick);
-  //   }
-  // });
 
   return (
     <div className={`popup popup_type_${props.name} ${popupState}`}>
