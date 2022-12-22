@@ -6,6 +6,7 @@ function Main(props) {
   const [userName,        setUserName       ] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar,      setUserAvatar     ] = React.useState('');
+  const [cards,           setCards          ] = React.useState([]);
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -18,6 +19,35 @@ function Main(props) {
         console.log(`Ошибка при получении данных о пользователе: ${error}`);
       });
   });
+
+  React.useEffect(() => {
+    api.getInitialCards()
+      .then((cardsData) => {
+        console.log(cardsData); ///map
+        // const initialCards = cardsData;
+        // initialCards.forEach(card => {
+        //   console.log(card);
+          // setCards([...cards,             // return ???? где то тут key
+          //   <li className="elements__list-item">
+          //     <article className="element">
+          //       <img className="element__image" src={card.link} alt="" />
+          //       <div className="element__caption">
+          //         <h2 className="element__title">{card.name}</h2>
+          //         <div className="element__like">
+          //           <button className="element__button-like" type="button"></button>
+          //           <p className = "element__like-counter"></p>
+          //         </div>
+          //       </div>
+          //     </article>
+          //     <button className="elements__button-remove" type="button"></button>
+          //   </li>
+          // ]);
+        // });
+      })
+      .catch((error) => {
+        console.log(`Ошибка при загрузке карточек: ${error}`);
+      })
+  }, [cards]); //пустой массив для 1 раза загр
 
   return (
     <main className="content">
@@ -44,7 +74,8 @@ function Main(props) {
         </section>
         <section className="elements" aria-label="Блок с карточками">
           <ul className="elements__list">
-            <template id="cardTemplate">
+            {cards}
+            {/* <template id="cardTemplate">
               <li className="elements__list-item">
                 <article className="element">
                   <img className="element__image" src="#" alt="" />
@@ -57,7 +88,7 @@ function Main(props) {
                   </div>
                 </article>
               <button className="elements__button-remove" type="button"></button></li>
-            </template>
+            </template> */}
           </ul>
         </section>
       </main>
