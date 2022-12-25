@@ -24,8 +24,8 @@ function App() {
     setAddPlacePopupState(true);
   }
 
-  function handleCardClick() {
-    setSelectedCard(true);
+  function handleCardClick(card) {
+    setSelectedCard(card);
   }
 
   function closeAllPopups() {
@@ -58,6 +58,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
 
