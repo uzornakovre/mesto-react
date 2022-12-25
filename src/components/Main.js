@@ -23,31 +23,12 @@ function Main(props) {
   React.useEffect(() => {
     api.getInitialCards()
       .then((cardsData) => {
-        console.log(cardsData); ///map
-        // const initialCards = cardsData;
-        // initialCards.forEach(card => {
-        //   console.log(card);
-          // setCards([...cards,             // return ???? где то тут key
-          //   <li className="elements__list-item">
-          //     <article className="element">
-          //       <img className="element__image" src={card.link} alt="" />
-          //       <div className="element__caption">
-          //         <h2 className="element__title">{card.name}</h2>
-          //         <div className="element__like">
-          //           <button className="element__button-like" type="button"></button>
-          //           <p className = "element__like-counter"></p>
-          //         </div>
-          //       </div>
-          //     </article>
-          //     <button className="elements__button-remove" type="button"></button>
-          //   </li>
-          // ]);
-        // });
+        setCards(cardsData);
       })
       .catch((error) => {
         console.log(`Ошибка при загрузке карточек: ${error}`);
       })
-  }, [cards]); //пустой массив для 1 раза загр
+  }, []);
 
   return (
     <main className="content">
@@ -55,7 +36,9 @@ function Main(props) {
           <div className="profile__avatar-container"
                onClick={props.onEditAvatar}
           >
-            <img className="profile__avatar" src={userAvatar} alt="Аватар" />
+            <img className="profile__avatar"
+                 src={userAvatar}
+                 alt="Аватар" />
           </div>
           <div className="profile__info">
             <h1 className="profile__name">{userName}</h1>
@@ -74,21 +57,28 @@ function Main(props) {
         </section>
         <section className="elements" aria-label="Блок с карточками">
           <ul className="elements__list">
-            {cards}
-            {/* <template id="cardTemplate">
-              <li className="elements__list-item">
-                <article className="element">
-                  <img className="element__image" src="#" alt="" />
-                  <div className="element__caption">
-                    <h2 className="element__title"></h2>
-                    <div className="element__like">
-                      <button className="element__button-like" type="button"></button>
-                      <p className = "element__like-counter"></p>
+            {
+              cards.map(card => (
+                <li className="elements__list-item" 
+                    key={card._id}>
+                  <article className="element">
+                    <img className="element__image" 
+                         src={card.link}
+                         alt=""
+                        //  onClick={}
+                    />
+                    <div className="element__caption">
+                      <h2 className="element__title">{card.name}</h2>
+                      <div className="element__like">
+                        <button className="element__button-like" type="button"></button>
+                        <p className = "element__like-counter">{card.likes.length}</p>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              <button className="elements__button-remove" type="button"></button></li>
-            </template> */}
+                  </article>
+                  <button className="elements__button-remove" type="button"></button>
+                </li>
+              ))
+            }
           </ul>
         </section>
       </main>
