@@ -16,12 +16,14 @@ function Card(props) {
         <div className="element__caption">
           <h2 className="element__title">{props.card.name}</h2>
           <div className="element__like">
-            <button className="element__button-like" type="button"></button>
+            <button className="element__button-like"
+                    type="button"></button>
             <p className = "element__like-counter">{props.card.likes.length}</p>
           </div>
         </div>
       </article>
-      <button className="elements__button-remove" type="button"></button>
+      <button className="elements__button-remove"
+              type="button"></button>
     </li>
   )
 }

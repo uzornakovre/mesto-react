@@ -69,9 +69,27 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
-        <input type="text" className="popup__form-input popup__form-input_content_name" id="name" name="input_name" placeholder="Имя" minLength="2" maxLength="40" defaultValue="" required />
+        <input type="text"
+               className="popup__form-input popup__form-input_content_name"
+               id="name"
+               name="input_name"
+               placeholder="Имя"
+               minLength="2"
+               maxLength="40"
+               defaultValue=""
+               required
+        />
         <span className="popup__form-input-error popup__form-input-error_content_name"></span>
-        <input type="text" className="popup__form-input popup__form-input_content_job" id="job" name="input_job" placeholder="Профессия" minLength="2" maxLength="200" defaultValue="" required />
+        <input type="text"
+               className="popup__form-input popup__form-input_content_job"
+               id="job"
+               name="input_job"
+               placeholder="Профессия"
+               minLength="2"
+               maxLength="200"
+               defaultValue=""
+               required
+        />
         <span className="popup__form-input-error popup__form-input-error_content_job"></span>
       </PopupWithForm>
 
@@ -82,9 +100,24 @@ function App() {
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
-        <input type="text" className="popup__form-input popup__form-input_content_place" id="place" name="input_place-name" placeholder="Название" minLength="2" maxLength="30" defaultValue="" required />
+        <input type="text"
+               className="popup__form-input popup__form-input_content_place"
+               id="place"
+               name="input_place-name"
+               placeholder="Название"
+               minLength="2"
+               maxLength="30"
+               defaultValue=""
+               required
+        />
         <span className="popup__form-input-error popup__form-input-error_content_place"></span>
-        <input type="url" className="popup__form-input popup__form-input_content_url" id="url" name="image-url" placeholder="Ссылка на картинку" defaultValue="" required />
+        <input type="url" 
+               className="popup__form-input popup__form-input_content_url"
+               id="url"
+               name="image-url"
+               placeholder="Ссылка на картинку"
+               defaultValue=""
+               required />
         <span className="popup__form-input-error popup__form-input-error_content_url"></span>
       </PopupWithForm>  
 
@@ -95,7 +128,14 @@ function App() {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
-        <input type="url" className="popup__form-input popup__form-input_content_avatar" id="avatar" name="avatar-url" placeholder="Ссылка на аватар" defaultValue="" required />
+        <input type="url"
+               className="popup__form-input popup__form-input_content_avatar"
+               id="avatar"
+               name="avatar-url"
+               placeholder="Ссылка на аватар"
+               defaultValue=""
+               required
+        />
         <span className="popup__form-input-error popup__form-input-error_content_avatar"></span>  
       </PopupWithForm>
 
