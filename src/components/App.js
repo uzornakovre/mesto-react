@@ -3,7 +3,7 @@ import Header         from './Header.js';
 import Main           from './Main.js';
 import Footer         from './Footer.js';
 import PopupWithForm  from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
+import ImagePopup     from './ImagePopup.js';
 
 function App() {
 
@@ -148,7 +148,7 @@ function App() {
         <h2 className="popup__form-title popup__form-title_place_delete-card">Вы уверены?</h2>
       </PopupWithForm>
 
-      <PopupWithImage 
+      <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}
       />

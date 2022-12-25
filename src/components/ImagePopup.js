@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PopupWithImage(props) {
+function ImagePopup(props) {
   const [popupState, setPopupState] = React.useState('');
   
   React.useEffect(() => {
@@ -30,4 +30,4 @@ function PopupWithImage(props) {
   )
 }
 
-export default PopupWithImage;
+export default ImagePopup;
