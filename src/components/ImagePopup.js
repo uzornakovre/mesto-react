@@ -4,7 +4,7 @@ function ImagePopup(props) {
   const [popupState, setPopupState] = React.useState('');
   
   React.useEffect(() => {
-    if (props.card.name != '') {
+    if (props.card.name != '' && props.card.link != '') {
       setPopupState('popup_opened');
     } else {
       setPopupState('');
