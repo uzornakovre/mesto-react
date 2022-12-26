@@ -10,7 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupState] = React.useState(false);
   const [isAddPlacePopupOpen,    setAddPlacePopupState   ] = React.useState(false);
   const [isEditAvatarPopupOpen,  setEditAvatarPopupState ] = React.useState(false);
-  const [selectedCard,           setSelectedCard         ] = React.useState(false);
+  const [selectedCard,           setSelectedCard         ] = React.useState({name: '', link: ''});
 
   function handleEditAvatarClick() {
     setEditAvatarPopupState(true);
@@ -32,7 +32,7 @@ function App() {
       setAddPlacePopupState(false);
       setEditProfilePopupState(false);
       setEditAvatarPopupState(false);
-      setSelectedCard(false);
+      setSelectedCard({name: '', link: ''});
   }
 
   function handleEscClick(evt) {
@@ -51,7 +51,7 @@ function App() {
     <div className="page__content"
           tabIndex="0"
           onKeyDown={handleEscClick}
-          onClick={handlePopupOverlayClick}
+          onMouseDown={handlePopupOverlayClick}
       >
       <Header />
       <Main 
