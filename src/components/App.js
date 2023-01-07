@@ -15,11 +15,13 @@ function App() {
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
   const [selectedCard,            setSelectedCard         ] = React.useState({name: '', link: ''});
   const [currentUser,             setCurrentUser          ] = React.useState({});
+  const [cards,                   setCards                ] = React.useState([]);
 
   React.useEffect(() => {
-    api.getUserInfo()
-      .then((userData) => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([userData, cardsData]) => {
         setCurrentUser(userData);
+        setCards(cardsData);
       })
       .catch((error) => {
         console.log(`Ошибка при получении данных: ${error}`);
@@ -40,11 +42,34 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
+    console.log(card)
   }
 
   function handleDeleteClick() {
     setConfirmationPopupOpen(true);
   }
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
+    
+    if (!isLiked) {
+      api.likeCard(card._id, card.owner)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+        })
+        .catch((error) => {
+          console.log(`Ошибка при постановке лайка: ${error}`);
+        })
+    } else {
+      api.dislikeCard(card._id, card.owner)
+        .then((newCard) => {
+          setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+        })
+        .catch((error) => {
+          console.log(`Ошибка при удалении лайка: ${error}`);
+        })
+    }
+}
 
   function closeAllPopups() {
       setAddPlacePopupState(false);
@@ -80,6 +105,9 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
           onDeleteClick={handleDeleteClick}
+          onCardLike={handleCardLike}
+          cards={cards}
+
         />
         <Footer />
 

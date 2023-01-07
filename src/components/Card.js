@@ -10,6 +10,10 @@ function Card(props) {
     props.onCardClick(props.card);
   }
 
+  function handleLikeClick() {
+    props.onCardLike(props.card);
+  }
+
   return (
     <li className="elements__list-item">
       <article className="element">
@@ -22,7 +26,9 @@ function Card(props) {
           <h2 className="element__title">{props.card.name}</h2>
           <div className="element__like">
             <button className={`element__button-like ${isLiked && 'element__button-like_active'}`}
-                    type="button"></button>
+                    type="button"
+                    onClick={handleLikeClick}
+            ></button>
             <p className = "element__like-counter">{props.card.likes.length}</p>
           </div>
         </div>
