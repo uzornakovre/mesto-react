@@ -4,6 +4,7 @@ import Main                   from './Main.js';
 import Footer                 from './Footer.js';
 import PopupWithForm          from './PopupWithForm.js';
 import ImagePopup             from './ImagePopup.js';
+import EditProfilePopup       from './EditProfilePopup';
 import api                    from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
@@ -12,7 +13,7 @@ function App() {
   const [isEditProfilePopupOpen,  setEditProfilePopupState] = React.useState(false);
   const [isAddPlacePopupOpen,     setAddPlacePopupState   ] = React.useState(false);
   const [isEditAvatarPopupOpen,   setEditAvatarPopupState ] = React.useState(false);
-  const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
+  // const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
   const [selectedCard,            setSelectedCard         ] = React.useState({name: '', link: ''});
   const [currentUser,             setCurrentUser          ] = React.useState({});
   const [cards,                   setCards                ] = React.useState([]);
@@ -42,11 +43,24 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card);
-    console.log(card)
   }
 
-  function handleDeleteClick() {
-    setConfirmationPopupOpen(true);
+  // function handleDeleteClick() {
+  //   setConfirmationPopupOpen(true);
+  // }
+
+  function handleCardDelete(card) {
+    const isOwn = card.owner._id === currentUser._id;
+
+    if (isOwn) {
+      api.deleteCard(card._id)
+        .then(() => {
+          setCards((state) => state.filter((c) => c._id !== card._id))
+        })
+        .catch((error) => {
+          console.log(`Ошибка при удалении карточки: ${error}`);
+        })
+    }
   }
 
   function handleCardLike(card) {
@@ -75,7 +89,7 @@ function App() {
       setAddPlacePopupState(false);
       setEditProfilePopupState(false);
       setEditAvatarPopupState(false);
-      setConfirmationPopupOpen(false);
+      // setConfirmationPopupOpen(false);
       setSelectedCard({name: '', link: ''});
   }
 
@@ -104,43 +118,16 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
-          onDeleteClick={handleDeleteClick}
+          onDeleteClick={handleCardDelete}
           onCardLike={handleCardLike}
           cards={cards}
 
         />
         <Footer />
 
-        <PopupWithForm 
-          name={'edit-profile'}
-          title={'Редактировать профиль'}
-          submitText={'Сохранить'}
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-        >
-          <input type="text"
-                className="popup__form-input popup__form-input_content_name"
-                id="name"
-                name="input_name"
-                placeholder="Имя"
-                minLength="2"
-                maxLength="40"
-                defaultValue=""
-                required
-          />
-          <span className="popup__form-input-error popup__form-input-error_content_name"></span>
-          <input type="text"
-                className="popup__form-input popup__form-input_content_job"
-                id="job"
-                name="input_job"
-                placeholder="Профессия"
-                minLength="2"
-                maxLength="200"
-                defaultValue=""
-                required
-          />
-          <span className="popup__form-input-error popup__form-input-error_content_job"></span>
-        </PopupWithForm>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen}
+                          onClose={closeAllPopups}
+        />
 
         <PopupWithForm 
           name={'new-place'}
@@ -192,8 +179,9 @@ function App() {
           name={'delete-card'}
           title={'Вы уверены?'}
           submitText={'Да'}
-          isOpen={isConfirmationPopupOpen}
+          // isOpen={isConfirmationPopupOpen}
           onClose={closeAllPopups}
+          // onSubmit={handleCardDelete}
         >
           {/* <h2 className="popup__form-title popup__form-title_place_delete-card">Вы уверены?</h2> */}
         </PopupWithForm>

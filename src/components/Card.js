@@ -14,6 +14,10 @@ function Card(props) {
     props.onCardLike(props.card);
   }
 
+  function handleDeleteClick() {
+    props.onDeleteClick(props.card);
+  }
+
   return (
     <li className="elements__list-item">
       <article className="element">
@@ -35,7 +39,7 @@ function Card(props) {
       </article>
       {isOwn && <button className="elements__button-remove elements__button-remove_active"
                         type="button"
-                        onClick={props.onDeleteClick}></button>}
+                        onClick={handleDeleteClick}></button>}
     </li>
   )
 }
