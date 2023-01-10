@@ -10,7 +10,7 @@ function PopupWithForm(props) {
       setPopupState('');
     }
   }, [props.isOpen]);
-  
+
   return (
     <div className={`popup popup_type_${props.name} ${popupState}`}>
       <div className={`popup__container popup__container_type_${props.name}`}>
@@ -29,7 +29,8 @@ function PopupWithForm(props) {
           <h2 className={`popup__form-title popup__form-title_place_${props.name}`}>{props.title}</h2>
             {props.children}
           <button type="submit"
-                  className="popup__form-submit"
+                  className={`popup__form-submit ${!props.isValid && 'popup__form-submit_disabled'}`}
+                  disabled={!props.isValid}
           >
             {props.submitText}
           </button>
