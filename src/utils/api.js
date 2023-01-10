@@ -50,8 +50,8 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: cardData.name,
-        link: cardData.link
+        name: cardData.placeName,
+        link: cardData.placeLink
       })
     }).then(this._checkStatus)
   }

@@ -1,11 +1,11 @@
 import React                  from 'react';
-import Header                 from './Header.js';
-import Main                   from './Main.js';
-import Footer                 from './Footer.js';
-import PopupWithForm          from './PopupWithForm.js';
-import ImagePopup             from './ImagePopup.js';
+import Header                 from './Header';
+import Main                   from './Main';
+import Footer                 from './Footer';
+import AddPlacePopup          from './AddPlacePopup';
+import ImagePopup             from './ImagePopup';
 import EditProfilePopup       from './EditProfilePopup';
-import EditAvatarPopup        from './EditAvatarPopup.js';
+import EditAvatarPopup        from './EditAvatarPopup';
 import ConfirmationPopup      from './ConfirmationPopup';
 import api                    from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
@@ -110,7 +110,18 @@ function App() {
           console.log(`Ошибка при удалении лайка: ${error}`);
         })
     }
-}
+  }
+
+  function handleAddPlaceSubmit(cardData) {
+    api.createCard(cardData)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((error) => {
+        console.log(`Ошибка при создании новой карточки: ${error}`);
+      })
+  }
 
   function closeAllPopups() {
       setAddPlacePopupState(false);
@@ -157,33 +168,10 @@ function App() {
                           onUpdateUser={handleUpdateUser}
         />
 
-        <PopupWithForm 
-          name={'new-place'}
-          title={'Новое место'}
-          submitText={'Создать'}
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-        >
-          <input type="text"
-                className="popup__form-input popup__form-input_content_place"
-                id="place"
-                name="input_place-name"
-                placeholder="Название"
-                minLength="2"
-                maxLength="30"
-                defaultValue=""
-                required
-          />
-          <span className="popup__form-input-error popup__form-input-error_content_place"></span>
-          <input type="url" 
-                className="popup__form-input popup__form-input_content_url"
-                id="url"
-                name="image-url"
-                placeholder="Ссылка на картинку"
-                defaultValue=""
-                required />
-          <span className="popup__form-input-error popup__form-input-error_content_url"></span>
-        </PopupWithForm>  
+        <AddPlacePopup isOpen={isAddPlacePopupOpen}
+                       onClose={closeAllPopups}
+                       onAddPlace={handleAddPlaceSubmit}
+        />
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
                          onClose={closeAllPopups}
