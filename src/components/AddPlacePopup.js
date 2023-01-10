@@ -3,8 +3,17 @@ import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
 
-  const placeNameRef = React.useRef();
-  const placeLinkRef = React.useRef();
+  const placeNameRef                  = React.useRef();
+  const placeLinkRef                  = React.useRef();
+  const [submitText,  setSubmitText ] = React.useState('Создать');
+
+  React.useEffect(() => {
+    if (props.isLoading) {
+      setSubmitText('Создание карточки...');
+    } else {
+      setSubmitText('Создать');
+    }
+  }, [props.isLoading]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -12,14 +21,17 @@ function AddPlacePopup(props) {
     props.onAddPlace({ 
       placeName: placeNameRef.current.value,
       placeLink: placeLinkRef.current.value 
-    })
+    });
+
+    placeNameRef.current.value = '';
+    placeLinkRef.current.value = '';
   }
 
   return (
     <PopupWithForm 
       name={'new-place'}
       title={'Новое место'}
-      submitText={'Создать'}
+      submitText={submitText}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

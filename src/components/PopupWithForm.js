@@ -10,12 +10,7 @@ function PopupWithForm(props) {
       setPopupState('');
     }
   }, [props.isOpen]);
-
-  // function handleConfirmDelete(evt) {
-  //   evt.preventDefault();
-  //   props.onSubmit(props.card);
-  // }
-
+  
   return (
     <div className={`popup popup_type_${props.name} ${popupState}`}>
       <div className={`popup__container popup__container_type_${props.name}`}>
@@ -35,7 +30,6 @@ function PopupWithForm(props) {
             {props.children}
           <button type="submit"
                   className="popup__form-submit"
-                  // onClick={handleConfirmDelete}
           >
             {props.submitText}
           </button>

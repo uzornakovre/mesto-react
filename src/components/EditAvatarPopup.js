@@ -2,7 +2,9 @@ import React         from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup(props) {
-  
+
+  const [submitText,  setSubmitText ] = React.useState('Сохранить');
+
   const avatarRef = React.useRef();
 
   function handleSubmit(evt) {
@@ -15,11 +17,19 @@ function EditAvatarPopup(props) {
     avatarRef.current.value = '';
   }
 
+  React.useEffect(() => {
+    if (props.isLoading) {
+      setSubmitText('Сохранение...');
+    } else {
+      setSubmitText('Сохранить');
+    }
+  }, [props.isLoading]);
+
   return (
     <PopupWithForm 
       name={'avatar'}
       title={'Обновить аватар'}
-      submitText={'Сохранить'}
+      submitText={submitText}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

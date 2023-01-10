@@ -20,6 +20,7 @@ function App() {
   const [selectedCard,            setSelectedCard         ] = React.useState({name: '', link: ''});
   const [currentUser,             setCurrentUser          ] = React.useState({});
   const [cards,                   setCards                ] = React.useState([]);
+  const [isLoading,               setIsLoading            ] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -33,6 +34,7 @@ function App() {
   }, []);
 
   function handleUpdateUser(userData) {
+    setIsLoading(true);
     api.changeUserInfo(userData)
       .then((newUserData) => {
         setCurrentUser(newUserData)
@@ -41,9 +43,13 @@ function App() {
       .catch((error) => {
         console.log(`Ошибка при изменении данных о пользователе: ${error}`);
       })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   function handleUpdateAvatar(userData) {
+    setIsLoading(true);
     api.changeUserAvatar(userData)
       .then((newUserData) => {
         setCurrentUser(newUserData);
@@ -51,6 +57,9 @@ function App() {
       })
       .catch((error) => {
         console.log(`Ошибка при изменении аватара: ${error}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -76,6 +85,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    setIsLoading(true);
     const isOwn = card.owner._id === currentUser._id;
 
     if (isOwn) {
@@ -86,6 +96,9 @@ function App() {
         })
         .catch((error) => {
           console.log(`Ошибка при удалении карточки: ${error}`);
+        })
+        .finally(() => {
+          setIsLoading(false);
         })
     }
   }
@@ -113,6 +126,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(cardData) {
+    setIsLoading(true);
     api.createCard(cardData)
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -120,6 +134,9 @@ function App() {
       })
       .catch((error) => {
         console.log(`Ошибка при создании новой карточки: ${error}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
       })
   }
 
@@ -159,29 +176,32 @@ function App() {
           onDeleteClick={handleDeleteClick}
           onCardLike={handleCardLike}
           cards={cards}
-
         />
         <Footer />
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen}
                           onClose={closeAllPopups}
                           onUpdateUser={handleUpdateUser}
+                          isLoading={isLoading}
         />
 
         <AddPlacePopup isOpen={isAddPlacePopupOpen}
                        onClose={closeAllPopups}
                        onAddPlace={handleAddPlaceSubmit}
+                       isLoading={isLoading}
         />
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
                          onClose={closeAllPopups}
                          onUpdateAvatar={handleUpdateAvatar}
+                         isLoading={isLoading}
         />
 
         <ConfirmationPopup isOpen={isConfirmationPopupOpen}
                            onClose={closeAllPopups}
                            onConfirmDelete={handleCardDelete}
                            currentCard={preparedForRemove}
+                           isLoading={isLoading}
         />
 
         <ImagePopup card={selectedCard}
