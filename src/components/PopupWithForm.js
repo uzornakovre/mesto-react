@@ -1,41 +1,48 @@
 import React from 'react';
 
-function PopupWithForm(props) {
+function PopupWithForm({ name,
+                         title,
+                         isOpen,
+                         onClose,
+                         onSubmit,
+                         isValid,
+                         isLoading,
+                         children }) {
   const [popupState, setPopupState] = React.useState('');
   
   React.useEffect(() => {
-    if (props.isOpen) {
+    if (isOpen) {
       setPopupState('popup_opened');
     } else {
       setPopupState('');
     }
-  }, [props.isOpen]);
+  }, [isOpen]);
 
   return (
-    <div className={`popup popup_type_${props.name} ${popupState}`}>
-      <div className={`popup__container popup__container_type_${props.name}`}>
+    <div className={`popup popup_type_${name} ${popupState}`}>
+      <div className={`popup__container popup__container_type_${name}`}>
         <button className="popup__close"
-                id={`close-${props.name}`}
+                id={`close-${name}`}
                 type="button"
-                onMouseDown={props.onClose}
+                onMouseDown={onClose}
         >
         </button>
         <form className="popup__form"
-              name={props.name}
-              id={props.name}
-              onSubmit={props.onSubmit}
+              name={name}
+              id={name}
+              onSubmit={onSubmit}
               noValidate
         >
-          <h2 className={`popup__form-title popup__form-title_place_${props.name}`}>{props.title}</h2>
-            {props.children}
+          <h2 className={`popup__form-title popup__form-title_place_${name}`}>{title}</h2>
+            {children}
           <button type="submit"
-                  className={`popup__form-submit ${!props.isValid && 'popup__form-submit_disabled'}`}
-                  disabled={!props.isValid}
+                  className={`popup__form-submit ${!isValid && 'popup__form-submit_disabled'}`}
+                  disabled={!isValid}
           >
-            {props.name === 'edit-profile' && (props.isLoading ? 'Сохранение...'        : 'Сохранить')}
-            {props.name === 'new-place'    && (props.isLoading ? 'Создание карточки...' : 'Создать'  )}
-            {props.name === 'avatar'       && (props.isLoading ? 'Сохранение...'        : 'Сохранить')}
-            {props.name === 'delete-card'  && (props.isLoading ? 'Удаление карточки...' : 'Да'       )}
+            {name === 'edit-profile' && (isLoading ? 'Сохранение...'        : 'Сохранить')}
+            {name === 'new-place'    && (isLoading ? 'Создание карточки...' : 'Создать'  )}
+            {name === 'avatar'       && (isLoading ? 'Сохранение...'        : 'Сохранить')}
+            {name === 'delete-card'  && (isLoading ? 'Удаление карточки...' : 'Да'       )}
           </button>
         </form>
       </div>

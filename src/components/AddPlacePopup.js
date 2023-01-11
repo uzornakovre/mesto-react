@@ -2,7 +2,10 @@ import React         from 'react';
 import PopupWithForm from './PopupWithForm';
 import urlValidation from '../utils/urlValidation';
 
-function AddPlacePopup(props) {
+function AddPlacePopup({ isOpen,
+                         onClose,
+                         onAddPlace,
+                         isLoading }) {
 
   const placeNameRef                          = React.useRef();
   const placeLinkRef                          = React.useRef();
@@ -19,7 +22,7 @@ function AddPlacePopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    props.onAddPlace({ 
+    onAddPlace({ 
       placeName: placeNameRef.current.value,
       placeLink: placeLinkRef.current.value 
     });
@@ -35,7 +38,7 @@ function AddPlacePopup(props) {
     setPlaceLink('');
     setPlNameInputInit(false);
     setPlLinkInputInit(false);
-  }, [props.isOpen])
+  }, [isOpen])
 
   // Валидация
 
@@ -73,11 +76,11 @@ function AddPlacePopup(props) {
     <PopupWithForm 
       name={'new-place'}
       title={'Новое место'}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
-      isLoading={props.isLoading}
+      isLoading={isLoading}
     >
       <input type="text"
              className={`popup__form-input popup__form-input_content_place ${plNameInputInit && placeNameError !== '' && 'popup__form-input_error'}`}

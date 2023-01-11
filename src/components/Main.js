@@ -2,7 +2,13 @@ import React                  from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Card                   from './Card.js';
 
-function Main(props) {
+function Main({ onEditProfile,
+                onAddPlace,
+                onEditAvatar,
+                onCardClick,
+                onDeleteClick,
+                onCardLike,
+                cards }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -10,7 +16,7 @@ function Main(props) {
     <main className="content">
         <section className="profile">
           <div className="profile__avatar-container"
-               onClick={props.onEditAvatar}
+               onClick={onEditAvatar}
           >
             <img className="profile__avatar"
                  src={currentUser.avatar}
@@ -20,26 +26,26 @@ function Main(props) {
             <h1 className="profile__name">{currentUser.name}</h1>
             <button className="profile__button-edit" 
                     type="button"
-                    onClick={props.onEditProfile}
+                    onClick={onEditProfile}
             >
             </button>
             <p className="profile__job">{currentUser.about}</p>
           </div>
           <button className="profile__button-add" 
                   type="button"
-                  onClick={props.onAddPlace}
+                  onClick={onAddPlace}
           >
           </button>
         </section>
         <section className="elements" aria-label="Блок с карточками">
           <ul className="elements__list">
             {
-              props.cards.map(card => (
+              cards.map(card => (
                 <Card card={card}
                       key={card._id}
-                      onCardClick={props.onCardClick}
-                      onDeleteClick={props.onDeleteClick}
-                      onCardLike={props.onCardLike}
+                      onCardClick={onCardClick}
+                      onDeleteClick={onDeleteClick}
+                      onCardLike={onCardLike}
                 />
               ))
             }

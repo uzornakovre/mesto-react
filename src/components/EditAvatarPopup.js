@@ -2,7 +2,10 @@ import React         from 'react';
 import PopupWithForm from './PopupWithForm';
 import urlValidation from '../utils/urlValidation';
 
-function EditAvatarPopup(props) {
+function EditAvatarPopup({ isOpen,
+                           onClose,
+                           onUpdateAvatar,
+                           isLoading }) {
 
   const avatarRef                     = React.useRef();
   const [avatarLink,  setAvatarLink ] = React.useState(''); // для валидации
@@ -16,7 +19,7 @@ function EditAvatarPopup(props) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    props.onUpdateAvatar({
+    onUpdateAvatar({
       avatar: avatarRef.current.value
     })
   }
@@ -26,7 +29,7 @@ function EditAvatarPopup(props) {
   React.useEffect(() => {
     setAvatarLink('');
     setAvInputInit(false);
-  }, [props.isOpen])
+  }, [isOpen])
 
   // Валидация
 
@@ -49,11 +52,11 @@ function EditAvatarPopup(props) {
     <PopupWithForm 
       name={'avatar'}
       title={'Обновить аватар'}
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
-      isLoading={props.isLoading}
+      isLoading={isLoading}
     >
       <input type="url"
             className={`popup__form-input popup__form-input_content_avatar ${avInputInit && !isValid && 'popup__form-input_error'}`}

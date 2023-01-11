@@ -2,7 +2,10 @@ import React                  from 'react';
 import PopupWithForm          from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-function EditProfilePopup(props) {
+function EditProfilePopup({ isOpen,
+                            onClose,
+                            onUpdateUser,
+                            isLoading }) {
 
   const currentUser                   = React.useContext(CurrentUserContext);
   const nameRef                       = React.useRef();
@@ -17,7 +20,7 @@ function EditProfilePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onUpdateUser({
+    onUpdateUser({
       name,
       about: description
     });
@@ -28,7 +31,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [props.isOpen, currentUser.about, currentUser.name]);
+  }, [isOpen, currentUser.about, currentUser.name]);
 
   // Валидация
 
@@ -64,11 +67,11 @@ function EditProfilePopup(props) {
     <PopupWithForm 
             name={'edit-profile'}
             title={'Редактировать профиль'}
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
             onSubmit={handleSubmit}
             isValid={isValid}
-            isLoading={props.isLoading}
+            isLoading={isLoading}
           >
             <input type="text"
                    className={`popup__form-input popup__form-input_content_name ${nameError !== '' && 'popup__form-input_error'}`}
