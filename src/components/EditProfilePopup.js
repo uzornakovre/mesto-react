@@ -13,11 +13,25 @@ function EditProfilePopup(props) {
   const [descError,   setDescError  ] = React.useState('');
   const [isValid,     setIsValid    ] = React.useState(true);
   const [submitText,  setSubmitText ] = React.useState('Сохранить');
+
+  // Отправка формы
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onUpdateUser({
+      name,
+      about: description
+    });
+  }
+
+  // Обновление стейтов при открытии модального окна
  
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [props.isOpen, currentUser.about, currentUser.name]);
+
+  // Индикатор загрузки запросов
 
   React.useEffect(() => {
     if (props.isLoading) {
@@ -26,6 +40,8 @@ function EditProfilePopup(props) {
       setSubmitText('Сохранить');
     }
   }, [props.isLoading]);
+
+  // Валидация
 
   React.useEffect(() => {
     if (nameRef.current.value.length === 0) { 
@@ -61,14 +77,6 @@ function EditProfilePopup(props) {
 
   function handleChangeDescription(evt) {
     setDescription(evt.target.value);
-  }
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    props.onUpdateUser({
-      name,
-      about: description
-    });
   }
 
   return (

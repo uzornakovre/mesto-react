@@ -11,10 +11,24 @@ function EditAvatarPopup(props) {
   const [isValid,     setIsValid    ] = React.useState(false);
   const [submitText,  setSubmitText ] = React.useState('Сохранить');
 
+  // Отправка формы
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    props.onUpdateAvatar({
+      avatar: avatarRef.current.value
+    })
+  }
+
+  // Обновление стейтов при открытии модального окна
+
   React.useEffect(() => {
     setAvatarLink('');
     setAvInputInit(false);
   }, [props.isOpen])
+
+  // Индикатор загрузки запросов
 
   React.useEffect(() => {
     if (props.isLoading) {
@@ -23,6 +37,8 @@ function EditAvatarPopup(props) {
       setSubmitText('Сохранить');
     }
   }, [props.isLoading]);
+
+  // Валидация
 
   React.useEffect(() => {
     if (avatarRef.current.value.length === 0) { 
@@ -36,14 +52,6 @@ function EditAvatarPopup(props) {
       setIsValid(true);
     }
   }, [avatarLink]);
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
-    props.onUpdateAvatar({
-      avatar: avatarRef.current.value
-    })
-  }
 
   function handleChangeAvatar(evt) {
     setAvatarLink(evt.target.value);

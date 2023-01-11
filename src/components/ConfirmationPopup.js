@@ -5,6 +5,15 @@ function ComfirmationPopup(props) {
 
   const [submitText,  setSubmitText ] = React.useState('Да');
 
+  // Отправка формы
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onConfirmDelete(props.currentCard);
+  }
+
+  // Индикатор загрузки запросов
+
   React.useEffect(() => {
     if (props.isLoading) {
       setSubmitText('Удаление...');
@@ -12,11 +21,6 @@ function ComfirmationPopup(props) {
       setSubmitText('Да');
     }
   }, [props.isLoading]);
-  
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    props.onConfirmDelete(props.currentCard);
-  }
 
   return (
     <PopupWithForm 

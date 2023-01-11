@@ -15,12 +15,30 @@ function AddPlacePopup(props) {
   const [isValid,         setIsValid        ] = React.useState(true);
   const [submitText,      setSubmitText     ] = React.useState('Создать');
 
+  // Отправка формы
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    props.onAddPlace({ 
+      placeName: placeNameRef.current.value,
+      placeLink: placeLinkRef.current.value 
+    });
+
+    placeNameRef.current.value = '';
+    placeLinkRef.current.value = '';
+  }
+
+  // Обновление стейтов при открытии модального окна
+
   React.useEffect(() => {
     setPlaceName('');
     setPlaceLink('');
     setPlNameInputInit(false);
     setPlLinkInputInit(false);
   }, [props.isOpen])
+
+  // Индикатор загрузки запросов
 
   React.useEffect(() => {
     if (props.isLoading) {
@@ -29,6 +47,8 @@ function AddPlacePopup(props) {
       setSubmitText('Создать');
     }
   }, [props.isLoading]);
+
+  // Валидация
 
   React.useEffect(() => {
     if (placeNameRef.current.value.length === 0) { 
@@ -57,18 +77,6 @@ function AddPlacePopup(props) {
       setIsValid(false);
     }
   }, [placeNameError, placeLinkError]);
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
-    props.onAddPlace({ 
-      placeName: placeNameRef.current.value,
-      placeLink: placeLinkRef.current.value 
-    });
-
-    placeNameRef.current.value = '';
-    placeLinkRef.current.value = '';
-  }
 
   function handleChangePlaceName(evt) {
     setPlaceName(evt.target.value);
