@@ -12,7 +12,6 @@ function EditProfilePopup(props) {
   const [nameError,   setNameError  ] = React.useState('');
   const [descError,   setDescError  ] = React.useState('');
   const [isValid,     setIsValid    ] = React.useState(true);
-  const [submitText,  setSubmitText ] = React.useState('Сохранить');
 
   // Отправка формы
 
@@ -30,16 +29,6 @@ function EditProfilePopup(props) {
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [props.isOpen, currentUser.about, currentUser.name]);
-
-  // Индикатор загрузки запросов
-
-  React.useEffect(() => {
-    if (props.isLoading) {
-      setSubmitText('Сохранение...');
-    } else {
-      setSubmitText('Сохранить');
-    }
-  }, [props.isLoading]);
 
   // Валидация
 
@@ -83,11 +72,11 @@ function EditProfilePopup(props) {
     <PopupWithForm 
             name={'edit-profile'}
             title={'Редактировать профиль'}
-            submitText={submitText}
             isOpen={props.isOpen}
             onClose={props.onClose}
             onSubmit={handleSubmit}
             isValid={isValid}
+            isLoading={props.isLoading}
           >
             <input type="text"
                    className={`popup__form-input popup__form-input_content_name ${nameError !== '' && 'popup__form-input_error'}`}

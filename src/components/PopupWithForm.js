@@ -32,7 +32,10 @@ function PopupWithForm(props) {
                   className={`popup__form-submit ${!props.isValid && 'popup__form-submit_disabled'}`}
                   disabled={!props.isValid}
           >
-            {props.submitText}
+            {props.name === 'edit-profile' && (props.isLoading ? 'Сохранение...'        : 'Сохранить')}
+            {props.name === 'new-place'    && (props.isLoading ? 'Создание карточки...' : 'Создать'  )}
+            {props.name === 'avatar'       && (props.isLoading ? 'Сохранение...'        : 'Сохранить')}
+            {props.name === 'delete-card'  && (props.isLoading ? 'Удаление карточки...' : 'Да'       )}
           </button>
         </form>
       </div>

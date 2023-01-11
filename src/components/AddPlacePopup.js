@@ -13,7 +13,6 @@ function AddPlacePopup(props) {
   const [placeNameError,  setPlaceNameError ] = React.useState('');
   const [placeLinkError,  setPlaceLinkError ] = React.useState('');
   const [isValid,         setIsValid        ] = React.useState(true);
-  const [submitText,      setSubmitText     ] = React.useState('Создать');
 
   // Отправка формы
 
@@ -37,16 +36,6 @@ function AddPlacePopup(props) {
     setPlNameInputInit(false);
     setPlLinkInputInit(false);
   }, [props.isOpen])
-
-  // Индикатор загрузки запросов
-
-  React.useEffect(() => {
-    if (props.isLoading) {
-      setSubmitText('Создание карточки...');
-    } else {
-      setSubmitText('Создать');
-    }
-  }, [props.isLoading]);
 
   // Валидация
 
@@ -92,11 +81,11 @@ function AddPlacePopup(props) {
     <PopupWithForm 
       name={'new-place'}
       title={'Новое место'}
-      submitText={submitText}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      isLoading={props.isLoading}
     >
       <input type="text"
              className={`popup__form-input popup__form-input_content_place ${plNameInputInit && placeNameError !== '' && 'popup__form-input_error'}`}

@@ -16,11 +16,14 @@ function App() {
   const [isAddPlacePopupOpen,     setAddPlacePopupState   ] = React.useState(false);
   const [isEditAvatarPopupOpen,   setEditAvatarPopupState ] = React.useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
-  const [preparedForRemove,       setPreparedForRemove    ] = React.useState({});
+  const [cardForRemove,           setCardForRemove        ] = React.useState({});
   const [selectedCard,            setSelectedCard         ] = React.useState({name: '', link: ''});
   const [currentUser,             setCurrentUser          ] = React.useState({});
   const [cards,                   setCards                ] = React.useState([]);
-  const [isLoading,               setIsLoading            ] = React.useState(false);
+  const [userDataIsLoading,       setUserDataIsLoading    ] = React.useState(false);
+  const [avatarIsLoading,         setAvatarIsLoading      ] = React.useState(false);
+  const [cardDataIsLoading,       setCardDataIsLoading    ] = React.useState(false);
+  const [cardRemoveIsLoading,     setCardRemoveIsLoading  ] = React.useState(false);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -34,7 +37,7 @@ function App() {
   }, []);
 
   function handleUpdateUser(userData) {
-    setIsLoading(true);
+    setUserDataIsLoading(true);
     api.changeUserInfo(userData)
       .then((newUserData) => {
         setCurrentUser(newUserData)
@@ -44,12 +47,12 @@ function App() {
         console.log(`Ошибка при изменении данных о пользователе: ${error}`);
       })
       .finally(() => {
-        setIsLoading(false);
+        setUserDataIsLoading(false);
       })
   }
 
   function handleUpdateAvatar(userData) {
-    setIsLoading(true);
+    setAvatarIsLoading(true);
     api.changeUserAvatar(userData)
       .then((newUserData) => {
         setCurrentUser(newUserData);
@@ -59,7 +62,7 @@ function App() {
         console.log(`Ошибка при изменении аватара: ${error}`);
       })
       .finally(() => {
-        setIsLoading(false);
+        setAvatarIsLoading(false);
       })
   }
 
@@ -81,11 +84,11 @@ function App() {
 
   function handleDeleteClick(card) {
     setConfirmationPopupOpen(true);
-    setPreparedForRemove(card);
+    setCardForRemove(card);
   }
 
   function handleCardDelete(card) {
-    setIsLoading(true);
+    setCardRemoveIsLoading(true);
     const isOwn = card.owner._id === currentUser._id;
 
     if (isOwn) {
@@ -98,7 +101,7 @@ function App() {
           console.log(`Ошибка при удалении карточки: ${error}`);
         })
         .finally(() => {
-          setIsLoading(false);
+          setCardRemoveIsLoading(false);
         })
     }
   }
@@ -126,7 +129,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(cardData) {
-    setIsLoading(true);
+    setCardDataIsLoading(true);
     api.createCard(cardData)
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -136,7 +139,7 @@ function App() {
         console.log(`Ошибка при создании новой карточки: ${error}`);
       })
       .finally(() => {
-        setIsLoading(false);
+        setCardDataIsLoading(false);
       })
   }
 
@@ -182,26 +185,26 @@ function App() {
         <EditProfilePopup isOpen={isEditProfilePopupOpen}
                           onClose={closeAllPopups}
                           onUpdateUser={handleUpdateUser}
-                          isLoading={isLoading}
+                          isLoading={userDataIsLoading}
         />
 
         <AddPlacePopup isOpen={isAddPlacePopupOpen}
                        onClose={closeAllPopups}
                        onAddPlace={handleAddPlaceSubmit}
-                       isLoading={isLoading}
+                       isLoading={cardDataIsLoading}
         />
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
                          onClose={closeAllPopups}
                          onUpdateAvatar={handleUpdateAvatar}
-                         isLoading={isLoading}
+                         isLoading={avatarIsLoading}
         />
 
         <ConfirmationPopup isOpen={isConfirmationPopupOpen}
                            onClose={closeAllPopups}
                            onConfirmDelete={handleCardDelete}
-                           currentCard={preparedForRemove}
-                           isLoading={isLoading}
+                           currentCard={cardForRemove}
+                           isLoading={cardRemoveIsLoading}
         />
 
         <ImagePopup card={selectedCard}

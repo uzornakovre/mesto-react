@@ -9,7 +9,6 @@ function EditAvatarPopup(props) {
   const [avInputInit, setAvInputInit] = React.useState(false);
   const [avatarError, setAvatarError] = React.useState('');
   const [isValid,     setIsValid    ] = React.useState(false);
-  const [submitText,  setSubmitText ] = React.useState('Сохранить');
 
   // Отправка формы
 
@@ -27,16 +26,6 @@ function EditAvatarPopup(props) {
     setAvatarLink('');
     setAvInputInit(false);
   }, [props.isOpen])
-
-  // Индикатор загрузки запросов
-
-  React.useEffect(() => {
-    if (props.isLoading) {
-      setSubmitText('Сохранение...');
-    } else {
-      setSubmitText('Сохранить');
-    }
-  }, [props.isLoading]);
 
   // Валидация
 
@@ -62,11 +51,11 @@ function EditAvatarPopup(props) {
     <PopupWithForm 
       name={'avatar'}
       title={'Обновить аватар'}
-      submitText={submitText}
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      isLoading={props.isLoading}
     >
       <input type="url"
             className={`popup__form-input popup__form-input_content_avatar ${avInputInit && !isValid && 'popup__form-input_error'}`}
