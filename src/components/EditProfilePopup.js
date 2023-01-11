@@ -31,36 +31,20 @@ function EditProfilePopup({ isOpen,
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
+    setNameError(nameRef.current.validationMessage);
+    setDescError(descRef.current.validationMessage);
   }, [isOpen, currentUser.about, currentUser.name]);
 
-  // Валидация
-
-  React.useEffect(() => {
-    if (nameRef.current.value.length === 0) { 
-      setNameError(nameRef.current.validationMessage);
-    } else if (nameRef.current.value.length <=  2) {
-      setNameError(nameRef.current.validationMessage);
-    } else {
-      setNameError('');
-    }
-  }, [name]);
-
-  React.useEffect(() => {
-    if (descRef.current.value.length === 0) { 
-      setDescError(descRef.current.validationMessage);
-    } else if (descRef.current.value.length <=  2) {
-      setDescError(descRef.current.validationMessage);
-    } else {
-      setDescError('');
-    }
-  }, [description]);
+  // обработчики изменений полей ввода
 
   function handleChangeName(evt) {
     setName(evt.target.value);
+    setNameError(nameRef.current.validationMessage);
   }
 
   function handleChangeDescription(evt) {
     setDescription(evt.target.value);
+    setDescError(descRef.current.validationMessage);
   }
 
   return (

@@ -1,6 +1,5 @@
 import React         from 'react';
 import PopupWithForm from './PopupWithForm';
-import urlValidation from '../utils/urlValidation';
 
 function EditAvatarPopup({ isOpen,
                            onClose,
@@ -8,7 +7,7 @@ function EditAvatarPopup({ isOpen,
                            isLoading }) {
 
   const avatarRef                     = React.useRef();
-  const [avatarLink,  setAvatarLink ] = React.useState(''); // для валидации
+  const [avatarLink,  setAvatarLink ] = React.useState('');
   const [avInputInit, setAvInputInit] = React.useState(false);
   const [avatarError, setAvatarError] = React.useState('');
   const isValid                       = avatarError === '';
@@ -29,23 +28,15 @@ function EditAvatarPopup({ isOpen,
   React.useEffect(() => {
     setAvatarLink('');
     setAvInputInit(false);
+    setAvatarError(avatarRef.current.validationMessage);
   }, [isOpen])
 
-  // Валидация
-
-  React.useEffect(() => {
-    if (avatarRef.current.value.length === 0) { 
-      setAvatarError(avatarRef.current.validationMessage);
-    } else if (urlValidation(avatarRef.current.value)) {
-      setAvatarError(avatarRef.current.validationMessage);
-    } else {
-      setAvatarError('');
-    }
-  }, [avatarLink]);
+  // Обработчик изменения поля ввода
 
   function handleChangeAvatar(evt) {
     setAvatarLink(evt.target.value);
     setAvInputInit(true);
+    setAvatarError(avatarRef.current.validationMessage);
   }
 
   return (

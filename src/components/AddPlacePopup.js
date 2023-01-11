@@ -1,6 +1,5 @@
 import React         from 'react';
 import PopupWithForm from './PopupWithForm';
-import urlValidation from '../utils/urlValidation';
 
 function AddPlacePopup({ isOpen,
                          onClose,
@@ -40,36 +39,18 @@ function AddPlacePopup({ isOpen,
     setPlLinkInputInit(false);
   }, [isOpen])
 
-  // Валидация
-
-  React.useEffect(() => {
-    if (placeNameRef.current.value.length < 1) { 
-      setPlaceNameError(placeNameRef.current.validationMessage);
-    } else if (placeNameRef.current.value.length <=  2) {
-      setPlaceNameError(placeNameRef.current.validationMessage);
-    } else {
-      setPlaceNameError('');
-    }
-  }, [placeName]);
-
-  React.useEffect(() => {
-    if (placeLinkRef.current.value.length === 0) { 
-      setPlaceLinkError(placeLinkRef.current.validationMessage);
-    } else if (urlValidation(placeLinkRef.current.value)) {
-      setPlaceLinkError(placeLinkRef.current.validationMessage);
-    } else {
-      setPlaceLinkError('');
-    }
-  }, [placeLink]);
+  // Обработчики изменений полей ввода
 
   function handleChangePlaceName(evt) {
     setPlaceName(evt.target.value);
     setPlNameInputInit(true);
+    setPlaceNameError(placeNameRef.current.validationMessage);
   }
 
   function handleChangePlaceLink(evt) {
     setPlaceLink(evt.target.value);
     setPlLinkInputInit(true);
+    setPlaceLinkError(placeLinkRef.current.validationMessage);
   }
 
   return (
