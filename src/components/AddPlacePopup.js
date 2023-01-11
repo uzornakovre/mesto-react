@@ -29,7 +29,7 @@ function AddPlacePopup(props) {
     placeLinkRef.current.value = '';
   }
 
-  // Обновление стейтов при открытии модального окна
+  // Обновление стейтов при повторном открытии модального окна
 
   React.useEffect(() => {
     setPlaceName('');
