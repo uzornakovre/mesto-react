@@ -16,6 +16,7 @@ function App() {
   const [isAddPlacePopupOpen,     setAddPlacePopupState   ] = React.useState(false);
   const [isEditAvatarPopupOpen,   setEditAvatarPopupState ] = React.useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = React.useState(false);
+  const [isImagePopupOpen,        setImagePopupState      ] = React.useState(false);
   const [cardForRemove,           setCardForRemove        ] = React.useState({});
   const [selectedCard,            setSelectedCard         ] = React.useState({name: '', link: ''});
   const [currentUser,             setCurrentUser          ] = React.useState({});
@@ -24,6 +25,8 @@ function App() {
   const [avatarIsLoading,         setAvatarIsLoading      ] = React.useState(false);
   const [cardDataIsLoading,       setCardDataIsLoading    ] = React.useState(false);
   const [cardRemoveIsLoading,     setCardRemoveIsLoading  ] = React.useState(false);
+
+  // Получение данных с сервера о пользователе и карточках
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -35,6 +38,8 @@ function App() {
         console.log(`Ошибка при получении данных: ${error}`);
       });
   }, []);
+
+  // Обработчик обновления данных о пользователе
 
   function handleUpdateUser(userData) {
     setUserDataIsLoading(true);
@@ -51,6 +56,8 @@ function App() {
       })
   }
 
+  // Обработчик обновления аватара пользователя
+
   function handleUpdateAvatar(userData) {
     setAvatarIsLoading(true);
     api.changeUserAvatar(userData)
@@ -66,21 +73,47 @@ function App() {
       })
   }
 
+  // Обработчик клика по аватару
+
   function handleEditAvatarClick() {
     setEditAvatarPopupState(true);
   }
+
+  // Обработчик клика по кнопке редактирования профиля
   
   function handleEditProfileClick() {
     setEditProfilePopupState(true);
   }
+
+  // Обработчики добавления новой карточки
   
   function handleAddPlaceClick() {
     setAddPlacePopupState(true);
   }
 
+  function handleAddPlaceSubmit(cardData) {
+    setCardDataIsLoading(true);
+    api.createCard(cardData)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((error) => {
+        console.log(`Ошибка при создании новой карточки: ${error}`);
+      })
+      .finally(() => {
+        setCardDataIsLoading(false);
+      })
+  }
+
+  // Обработчик клика по карточке
+
   function handleCardClick(card) {
     setSelectedCard(card);
+    setImagePopupState(true);
   }
+
+  // Обработчики удаления карточки
 
   function handleDeleteClick(card) {
     setConfirmationPopupOpen(true);
@@ -106,6 +139,8 @@ function App() {
     }
   }
 
+  // Обработчик, отвечающий за установку/снятие лайка
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
     
@@ -128,34 +163,18 @@ function App() {
     }
   }
 
-  function handleAddPlaceSubmit(cardData) {
-    setCardDataIsLoading(true);
-    api.createCard(cardData)
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
-        closeAllPopups();
-      })
-      .catch((error) => {
-        console.log(`Ошибка при создании новой карточки: ${error}`);
-      })
-      .finally(() => {
-        setCardDataIsLoading(false);
-      })
-  }
+  // Закрытие модальных окон
 
   function closeAllPopups() {
       setAddPlacePopupState(false);
       setEditProfilePopupState(false);
       setEditAvatarPopupState(false);
       setConfirmationPopupOpen(false);
+      setImagePopupState(false);
       setSelectedCard({name: '', link: ''});
   }
 
-  function handleEscClick(evt) {
-    if (evt.key === 'Escape') {
-      closeAllPopups();
-    }
-  }
+  // Обработчик закрытия модальных окон по клику на оверлей
 
   function handlePopupOverlayClick(evt) {
     if (evt.target.classList.contains('popup_opened')) {
@@ -163,11 +182,36 @@ function App() {
     }
   }
 
+  // Обработчик закрытия модальных окон по нажатию Escape
+
+  React.useEffect(() => {
+    function handleEscClick(evt) {
+      if (evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    if (isEditProfilePopupOpen  ||
+        isAddPlacePopupOpen     ||
+        isEditAvatarPopupOpen   ||
+        isConfirmationPopupOpen ||
+        isImagePopupOpen) {
+          document.addEventListener('keydown', handleEscClick);
+        } 
+          
+      return () => {
+        document.removeEventListener('keydown', handleEscClick);
+      }
+  }, [isEditProfilePopupOpen,
+      isAddPlacePopupOpen,
+      isEditAvatarPopupOpen,
+      isConfirmationPopupOpen,
+      isImagePopupOpen]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__content"
-          tabIndex="0"
-          onKeyDown={handleEscClick}
+          // tabIndex="0"
+          // onKeyDown={handleEscClick}
       >
         <Header />
         <Main 
