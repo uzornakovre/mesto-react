@@ -4,7 +4,8 @@ import PopupWithForm from './PopupWithForm';
 function EditAvatarPopup({ isOpen,
                            onClose,
                            onUpdateAvatar,
-                           isLoading }) {
+                           isLoading,
+                           onOverlayClick }) {
 
   const avatarRef                     = React.useRef();
   const [avatarLink,  setAvatarLink ] = React.useState('');
@@ -48,6 +49,7 @@ function EditAvatarPopup({ isOpen,
       onSubmit={handleSubmit}
       isValid={isValid}
       isLoading={isLoading}
+      onOverlayClick={onOverlayClick}
     >
       <input type="url"
             className={`popup__form-input popup__form-input_content_avatar ${avInputInit && !isValid && 'popup__form-input_error'}`}

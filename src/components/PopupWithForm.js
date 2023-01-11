@@ -7,6 +7,7 @@ function PopupWithForm({ name,
                          onSubmit,
                          isValid,
                          isLoading,
+                         onOverlayClick,
                          children }) {
   const [popupState, setPopupState] = React.useState('');
   
@@ -19,7 +20,9 @@ function PopupWithForm({ name,
   }, [isOpen]);
 
   return (
-    <div className={`popup popup_type_${name} ${popupState}`}>
+    <div className={`popup popup_type_${name} ${popupState}`}
+         onMouseDown={onOverlayClick}
+    >
       <div className={`popup__container popup__container_type_${name}`}>
         <button className="popup__close"
                 id={`close-${name}`}

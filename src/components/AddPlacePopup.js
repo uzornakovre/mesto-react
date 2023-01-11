@@ -4,7 +4,8 @@ import PopupWithForm from './PopupWithForm';
 function AddPlacePopup({ isOpen,
                          onClose,
                          onAddPlace,
-                         isLoading }) {
+                         isLoading,
+                         onOverlayClick }) {
 
   const placeNameRef                          = React.useRef();
   const placeLinkRef                          = React.useRef();
@@ -62,6 +63,7 @@ function AddPlacePopup({ isOpen,
       onSubmit={handleSubmit}
       isValid={isValid}
       isLoading={isLoading}
+      onOverlayClick={onOverlayClick}
     >
       <input type="text"
              className={`popup__form-input popup__form-input_content_place ${plNameInputInit && placeNameError !== '' && 'popup__form-input_error'}`}

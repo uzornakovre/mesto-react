@@ -168,7 +168,6 @@ function App() {
       <div className="page__content"
           tabIndex="0"
           onKeyDown={handleEscClick}
-          onMouseDown={handlePopupOverlayClick}
       >
         <Header />
         <Main 
@@ -186,18 +185,21 @@ function App() {
                           onClose={closeAllPopups}
                           onUpdateUser={handleUpdateUser}
                           isLoading={userDataIsLoading}
+                          onOverlayClick={handlePopupOverlayClick}
         />
 
         <AddPlacePopup isOpen={isAddPlacePopupOpen}
                        onClose={closeAllPopups}
                        onAddPlace={handleAddPlaceSubmit}
                        isLoading={cardDataIsLoading}
+                       onOverlayClick={handlePopupOverlayClick}
         />
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
                          onClose={closeAllPopups}
                          onUpdateAvatar={handleUpdateAvatar}
                          isLoading={avatarIsLoading}
+                         onOverlayClick={handlePopupOverlayClick}
         />
 
         <ConfirmationPopup isOpen={isConfirmationPopupOpen}
@@ -205,10 +207,12 @@ function App() {
                            onConfirmDelete={handleCardDelete}
                            currentCard={cardForRemove}
                            isLoading={cardRemoveIsLoading}
+                           onOverlayClick={handlePopupOverlayClick}
         />
 
         <ImagePopup card={selectedCard}
                     onClose={closeAllPopups}
+                    onOverlayClick={handlePopupOverlayClick}
         />
       </div>
     </CurrentUserContext.Provider>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ImagePopup({ card, onClose }) {
+function ImagePopup({ card, onClose, onOverlayClick }) {
   const [popupState, setPopupState] = React.useState('');
   
   React.useEffect(() => {
@@ -12,7 +12,9 @@ function ImagePopup({ card, onClose }) {
   }, [card.link, card.name]);
 
   return (
-    <div className={`popup popup_type_image ${popupState}`}>
+    <div className={`popup popup_type_image ${popupState}`}
+         onMouseDown={onOverlayClick}
+    >
       <div className="popup__container popup__container_type_image">
         <button className="popup__close"
                 id="close-image" 

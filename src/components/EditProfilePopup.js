@@ -5,7 +5,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 function EditProfilePopup({ isOpen,
                             onClose,
                             onUpdateUser,
-                            isLoading }) {
+                            isLoading,
+                            onOverlayClick }) {
 
   const currentUser                   = React.useContext(CurrentUserContext);
   const nameRef                       = React.useRef();
@@ -56,6 +57,7 @@ function EditProfilePopup({ isOpen,
             onSubmit={handleSubmit}
             isValid={isValid}
             isLoading={isLoading}
+            onOverlayClick={onOverlayClick}
           >
             <input type="text"
                    className={`popup__form-input popup__form-input_content_name ${nameError !== '' && 'popup__form-input_error'}`}
