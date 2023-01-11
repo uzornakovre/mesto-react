@@ -42,10 +42,10 @@ function EditAvatarPopup(props) {
 
   React.useEffect(() => {
     if (avatarRef.current.value.length === 0) { 
-      setAvatarError('Заполните это поле');
+      setAvatarError(`Заполните это поле`);
       setIsValid(false);
     } else if (urlValidation(avatarRef.current.value)) {
-      setAvatarError('Введите URL');
+      setAvatarError(`Введите URL`);
       setIsValid(false);
     } else {
       setAvatarError('');

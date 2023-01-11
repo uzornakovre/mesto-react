@@ -45,7 +45,7 @@ function EditProfilePopup(props) {
 
   React.useEffect(() => {
     if (nameRef.current.value.length === 0) { 
-      setNameError('Заполните это поле');
+      setNameError(`Заполните это поле`);
     } else if (nameRef.current.value.length <=  2) {
       setNameError(`Текст должен быть не короче 2 симв. Длина текста сейчас: ${nameRef.current.value.length} символ.`);
     } else {
@@ -55,7 +55,7 @@ function EditProfilePopup(props) {
 
   React.useEffect(() => {
     if (descRef.current.value.length === 0) { 
-      setDescError('Заполните это поле');
+      setDescError(`Заполните это поле`);
     } else if (descRef.current.value.length <=  2) {
       setDescError(`Текст должен быть не короче 2 симв. Длина текста сейчас: ${descRef.current.value.length} символ.`);
     } else {

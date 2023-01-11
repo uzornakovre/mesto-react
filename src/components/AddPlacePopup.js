@@ -51,8 +51,8 @@ function AddPlacePopup(props) {
   // Валидация
 
   React.useEffect(() => {
-    if (placeNameRef.current.value.length === 0) { 
-      setPlaceNameError('Заполните это поле');
+    if (placeNameRef.current.value.length < 1) { 
+      setPlaceNameError(`Заполните это поле`);
     } else if (placeNameRef.current.value.length <=  2) {
       setPlaceNameError(`Текст должен быть не короче 2 симв. Длина текста сейчас: ${placeNameRef.current.value.length} символ.`);
     } else {
@@ -62,9 +62,9 @@ function AddPlacePopup(props) {
 
   React.useEffect(() => {
     if (placeLinkRef.current.value.length === 0) { 
-      setPlaceLinkError('Заполните это поле');
+      setPlaceLinkError(`Заполните это поле`);
     } else if (urlValidation(placeLinkRef.current.value)) {
-      setPlaceLinkError('Введите URL');
+      setPlaceLinkError(`Введите URL`);
     } else {
       setPlaceLinkError('');
     }
