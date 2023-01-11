@@ -54,7 +54,7 @@ function AddPlacePopup(props) {
     if (placeNameRef.current.value.length < 1) { 
       setPlaceNameError(`Заполните это поле`);
     } else if (placeNameRef.current.value.length <=  2) {
-      setPlaceNameError(`Текст должен быть не короче 2 симв. Длина текста сейчас: ${placeNameRef.current.value.length} символ.`);
+      setPlaceNameError(`Текст должен быть не короче 2 символов`);
     } else {
       setPlaceNameError('');
     }

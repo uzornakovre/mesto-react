@@ -47,7 +47,7 @@ function EditProfilePopup(props) {
     if (nameRef.current.value.length === 0) { 
       setNameError(`Заполните это поле`);
     } else if (nameRef.current.value.length <=  2) {
-      setNameError(`Текст должен быть не короче 2 симв. Длина текста сейчас: ${nameRef.current.value.length} символ.`);
+      setNameError(`Текст должен быть не короче 2 символов`);
     } else {
       setNameError('');
     }
@@ -57,7 +57,7 @@ function EditProfilePopup(props) {
     if (descRef.current.value.length === 0) { 
       setDescError(`Заполните это поле`);
     } else if (descRef.current.value.length <=  2) {
-      setDescError(`Текст должен быть не короче 2 симв. Длина текста сейчас: ${descRef.current.value.length} символ.`);
+      setDescError(`Текст должен быть не короче 2 символов`);
     } else {
       setDescError('');
     }
