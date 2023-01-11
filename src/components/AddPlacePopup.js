@@ -44,9 +44,9 @@ function AddPlacePopup({ isOpen,
 
   React.useEffect(() => {
     if (placeNameRef.current.value.length < 1) { 
-      setPlaceNameError(`Заполните это поле`);
+      setPlaceNameError(placeNameRef.current.validationMessage);
     } else if (placeNameRef.current.value.length <=  2) {
-      setPlaceNameError(`Текст должен быть не короче 2 символов`);
+      setPlaceNameError(placeNameRef.current.validationMessage);
     } else {
       setPlaceNameError('');
     }
@@ -54,9 +54,9 @@ function AddPlacePopup({ isOpen,
 
   React.useEffect(() => {
     if (placeLinkRef.current.value.length === 0) { 
-      setPlaceLinkError(`Заполните это поле`);
+      setPlaceLinkError(placeLinkRef.current.validationMessage);
     } else if (urlValidation(placeLinkRef.current.value)) {
-      setPlaceLinkError(`Введите URL`);
+      setPlaceLinkError(placeLinkRef.current.validationMessage);
     } else {
       setPlaceLinkError('');
     }

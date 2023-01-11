@@ -35,9 +35,9 @@ function EditAvatarPopup({ isOpen,
 
   React.useEffect(() => {
     if (avatarRef.current.value.length === 0) { 
-      setAvatarError(`Заполните это поле`);
+      setAvatarError(avatarRef.current.validationMessage);
     } else if (urlValidation(avatarRef.current.value)) {
-      setAvatarError(`Введите URL`);
+      setAvatarError(avatarRef.current.validationMessage);
     } else {
       setAvatarError('');
     }

@@ -37,9 +37,9 @@ function EditProfilePopup({ isOpen,
 
   React.useEffect(() => {
     if (nameRef.current.value.length === 0) { 
-      setNameError(`Заполните это поле`);
+      setNameError(nameRef.current.validationMessage);
     } else if (nameRef.current.value.length <=  2) {
-      setNameError(`Текст должен быть не короче 2 символов`);
+      setNameError(nameRef.current.validationMessage);
     } else {
       setNameError('');
     }
@@ -47,9 +47,9 @@ function EditProfilePopup({ isOpen,
 
   React.useEffect(() => {
     if (descRef.current.value.length === 0) { 
-      setDescError(`Заполните это поле`);
+      setDescError(descRef.current.validationMessage);
     } else if (descRef.current.value.length <=  2) {
-      setDescError(`Текст должен быть не короче 2 символов`);
+      setDescError(descRef.current.validationMessage);
     } else {
       setDescError('');
     }
