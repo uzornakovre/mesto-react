@@ -8,7 +8,8 @@ function EditAvatarPopup(props) {
   const [avatarLink,  setAvatarLink ] = React.useState(''); // для валидации
   const [avInputInit, setAvInputInit] = React.useState(false);
   const [avatarError, setAvatarError] = React.useState('');
-  const [isValid,     setIsValid    ] = React.useState(false);
+  const isValid                       = avatarError === '';
+
 
   // Отправка формы
 
@@ -32,13 +33,10 @@ function EditAvatarPopup(props) {
   React.useEffect(() => {
     if (avatarRef.current.value.length === 0) { 
       setAvatarError(`Заполните это поле`);
-      setIsValid(false);
     } else if (urlValidation(avatarRef.current.value)) {
       setAvatarError(`Введите URL`);
-      setIsValid(false);
     } else {
       setAvatarError('');
-      setIsValid(true);
     }
   }, [avatarLink]);
 

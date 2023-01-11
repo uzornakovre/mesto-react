@@ -11,7 +11,7 @@ function EditProfilePopup(props) {
   const [description, setDescription] = React.useState('');
   const [nameError,   setNameError  ] = React.useState('');
   const [descError,   setDescError  ] = React.useState('');
-  const [isValid,     setIsValid    ] = React.useState(true);
+  const isValid                       = nameError === '' && descError === '';
 
   // Отправка формы
 
@@ -51,14 +51,6 @@ function EditProfilePopup(props) {
       setDescError('');
     }
   }, [description]);
-
-  React.useEffect(() => {
-    if (nameError === '' && descError === '') {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }, [nameError, descError]);
 
   function handleChangeName(evt) {
     setName(evt.target.value);

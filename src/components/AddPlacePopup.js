@@ -12,7 +12,7 @@ function AddPlacePopup(props) {
   const [plLinkInputInit, setPlLinkInputInit] = React.useState(false);
   const [placeNameError,  setPlaceNameError ] = React.useState('');
   const [placeLinkError,  setPlaceLinkError ] = React.useState('');
-  const [isValid,         setIsValid        ] = React.useState(true);
+  const isValid = placeNameError === '' && placeLinkError === '';
 
   // Отправка формы
 
@@ -58,14 +58,6 @@ function AddPlacePopup(props) {
       setPlaceLinkError('');
     }
   }, [placeLink]);
-
-  React.useEffect(() => {
-    if (placeNameError === '' && placeLinkError === '') {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }, [placeNameError, placeLinkError]);
 
   function handleChangePlaceName(evt) {
     setPlaceName(evt.target.value);
