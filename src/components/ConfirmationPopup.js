@@ -26,6 +26,7 @@ function ComfirmationPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
+      isValid={true}
     >
     </PopupWithForm>
   )
