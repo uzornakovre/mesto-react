@@ -1,11 +1,12 @@
 import React         from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function ComfirmationPopup({ isOpen,
+function ConfirmationPopup({ isOpen,
                              onClose,
                              onConfirmDelete,
                              currentCard,
-                             isLoading }) {
+                             isLoading,
+                             onOverlayClick }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -21,9 +22,10 @@ function ComfirmationPopup({ isOpen,
       onSubmit={handleSubmit}
       isValid={true}
       isLoading={isLoading}
+      onOverlayClick={onOverlayClick}
     >
     </PopupWithForm>
   )
 }
 
-export default ComfirmationPopup;
+export default ConfirmationPopup;
