@@ -196,8 +196,7 @@ function App() {
         isConfirmationPopupOpen ||
         isImagePopupOpen) {
           document.addEventListener('keydown', handleEscClick);
-        } 
-          
+        }     
       return () => {
         document.removeEventListener('keydown', handleEscClick);
       }
@@ -208,6 +207,7 @@ function App() {
       isImagePopupOpen]);
 
   return (
+
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page__content">
 
@@ -222,6 +222,7 @@ function App() {
           onCardLike={handleCardLike}
           cards={cards}
         />
+
         <Footer />
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen}
@@ -257,7 +258,7 @@ function App() {
                     onClose={closeAllPopups}
                     onOverlayClick={handlePopupOverlayClick}
         />
-        
+
       </div>
     </CurrentUserContext.Provider>
   );
