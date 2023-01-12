@@ -55,18 +55,19 @@ function AddPlacePopup({ isOpen,
   }
 
   return (
-    <PopupWithForm 
-      name={'new-place'}
-      title={'Новое место'}
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-      isValid={isValid}
-      isLoading={isLoading}
-      onOverlayClick={onOverlayClick}
+    <PopupWithForm name={'new-place'}
+                   title={'Новое место'}
+                   isOpen={isOpen}
+                   onClose={onClose}
+                   onSubmit={handleSubmit}
+                   isValid={isValid}
+                   isLoading={isLoading}
+                   onOverlayClick={onOverlayClick}
     >
       <input type="text"
-             className={`popup__form-input popup__form-input_content_place ${plNameInputInit && placeNameError !== '' && 'popup__form-input_error'}`}
+             className={`popup__form-input popup__form-input_content_place ${
+               plNameInputInit && placeNameError !== '' && 'popup__form-input_error'
+             }`}
              id="place"
              name="input_place-name"
              placeholder="Название"
@@ -81,7 +82,9 @@ function AddPlacePopup({ isOpen,
         {plNameInputInit && `${placeNameError}`}
       </span>
       <input type="url" 
-             className={`popup__form-input popup__form-input_content_avatar ${plLinkInputInit && placeLinkError !== '' && 'popup__form-input_error'}`}
+             className={`popup__form-input popup__form-input_content_avatar ${
+               plLinkInputInit && placeLinkError !== '' && 'popup__form-input_error'
+             }`}
              id="url"
              name="image-url"
              placeholder="Ссылка на картинку"

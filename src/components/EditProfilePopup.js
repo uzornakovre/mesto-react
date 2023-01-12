@@ -49,47 +49,50 @@ function EditProfilePopup({ isOpen,
   }
 
   return (
-    <PopupWithForm 
-            name={'edit-profile'}
-            title={'Редактировать профиль'}
-            isOpen={isOpen}
-            onClose={onClose}
-            onSubmit={handleSubmit}
-            isValid={isValid}
-            isLoading={isLoading}
-            onOverlayClick={onOverlayClick}
-          >
-            <input type="text"
-                   className={`popup__form-input popup__form-input_content_name ${nameError !== '' && 'popup__form-input_error'}`}
-                   id="name"
-                   name="name"
-                   placeholder="Имя"
-                   minLength="2"
-                   maxLength="40"
-                   value={name || ''}
-                   ref={nameRef}
-                   onChange={handleChangeName}
-                   required
-            />
-            <span className="popup__form-input-error popup__form-input-error_content_name">
-              {nameError}
-            </span>
-            <input type="text"
-                   className={`popup__form-input popup__form-input_content_job ${descError !== '' && 'popup__form-input_error'}`}
-                   id="job"
-                   name="description"
-                   placeholder="Профессия"
-                   minLength="2"
-                   maxLength="200"
-                   value={description || ''}
-                   ref={descRef}
-                   onChange={handleChangeDescription}
-                   required
-            />
-            <span className="popup__form-input-error popup__form-input-error_content_job">
-              {descError}
-            </span>
-          </PopupWithForm>
+    <PopupWithForm name={'edit-profile'}
+                   title={'Редактировать профиль'}
+                   isOpen={isOpen}
+                   onClose={onClose}
+                   onSubmit={handleSubmit}
+                   isValid={isValid}
+                   isLoading={isLoading}
+                   onOverlayClick={onOverlayClick}
+    >
+      <input type="text"
+             className={`popup__form-input popup__form-input_content_name ${
+               nameError !== '' && 'popup__form-input_error'
+             }`}
+             id="name"
+             name="name"
+             placeholder="Имя"
+             minLength="2"
+             maxLength="40"
+             value={name || ''}
+             ref={nameRef}
+             onChange={handleChangeName}
+             required
+      />
+      <span className="popup__form-input-error popup__form-input-error_content_name">
+        {nameError}
+      </span>
+      <input type="text"
+             className={`popup__form-input popup__form-input_content_job ${
+               descError !== '' && 'popup__form-input_error'
+             }`}
+             id="job"
+             name="description"
+             placeholder="Профессия"
+             minLength="2"
+             maxLength="200"
+             value={description || ''}
+             ref={descRef}
+             onChange={handleChangeDescription}
+             required
+      />
+      <span className="popup__form-input-error popup__form-input-error_content_job">
+        {descError}
+      </span>
+    </PopupWithForm>
   )
 }
 

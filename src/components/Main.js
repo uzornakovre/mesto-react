@@ -14,44 +14,44 @@ function Main({ onEditProfile,
 
   return (
     <main className="content">
-        <section className="profile">
-          <div className="profile__avatar-container"
-               onClick={onEditAvatar}
-          >
-            <img className="profile__avatar"
-                 src={currentUser.avatar}
-                 alt="Аватар" />
-          </div>
-          <div className="profile__info">
-            <h1 className="profile__name">{currentUser.name}</h1>
-            <button className="profile__button-edit" 
-                    type="button"
-                    onClick={onEditProfile}
-            >
-            </button>
-            <p className="profile__job">{currentUser.about}</p>
-          </div>
-          <button className="profile__button-add" 
+      <section className="profile">
+        <div className="profile__avatar-container"
+              onClick={onEditAvatar}
+        >
+          <img className="profile__avatar"
+                src={currentUser.avatar}
+                alt="Аватар" />
+        </div>
+        <div className="profile__info">
+          <h1 className="profile__name">{currentUser.name}</h1>
+          <button className="profile__button-edit" 
                   type="button"
-                  onClick={onAddPlace}
+                  onClick={onEditProfile}
           >
           </button>
-        </section>
-        <section className="elements" aria-label="Блок с карточками">
-          <ul className="elements__list">
-            {
-              cards.map(card => (
-                <Card card={card}
-                      key={card._id}
-                      onCardClick={onCardClick}
-                      onDeleteClick={onDeleteClick}
-                      onCardLike={onCardLike}
-                />
-              ))
-            }
-          </ul>
-        </section>
-      </main>
+          <p className="profile__job">{currentUser.about}</p>
+        </div>
+        <button className="profile__button-add" 
+                type="button"
+                onClick={onAddPlace}
+        >
+        </button>
+      </section>
+      <section className="elements" aria-label="Блок с карточками">
+        <ul className="elements__list">
+          {
+            cards.map(card => (
+              <Card card={card}
+                    key={card._id}
+                    onCardClick={onCardClick}
+                    onDeleteClick={onDeleteClick}
+                    onCardLike={onCardLike}
+              />
+            ))
+          }
+        </ul>
+      </section>
+    </main>
   )
 }
 

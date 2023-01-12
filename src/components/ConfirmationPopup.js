@@ -14,15 +14,14 @@ function ConfirmationPopup({ isOpen,
   }
 
   return (
-    <PopupWithForm 
-      name={'delete-card'}
-      title={'Вы уверены?'}
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-      isValid={true}
-      isLoading={isLoading}
-      onOverlayClick={onOverlayClick}
+    <PopupWithForm name={'delete-card'}
+                   title={'Вы уверены?'}
+                   isOpen={isOpen}
+                   onClose={onClose}
+                   onSubmit={handleSubmit}
+                   isValid={true}
+                   isLoading={isLoading}
+                   onOverlayClick={onOverlayClick}
     >
     </PopupWithForm>
   )
