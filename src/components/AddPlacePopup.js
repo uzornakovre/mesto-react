@@ -31,13 +31,15 @@ function AddPlacePopup({ isOpen,
     placeLinkRef.current.value = '';
   }
 
-  // Обновление стейтов при повторном открытии модального окна
+  // Обновление стейтов при открытии модального окна
 
   React.useEffect(() => {
     setPlaceName('');
     setPlaceLink('');
     setPlNameInputInit(false);
     setPlLinkInputInit(false);
+    setPlaceNameError(placeNameRef.current.validationMessage);
+    setPlaceLinkError(placeLinkRef.current.validationMessage);
   }, [isOpen])
 
   // Обработчики изменений полей ввода

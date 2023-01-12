@@ -1,18 +1,11 @@
 import React from 'react';
 
 function ImagePopup({ card, onClose, onOverlayClick }) {
-  const [popupState, setPopupState] = React.useState('');
-  
-  React.useEffect(() => {
-    if (card.name !== '' && card.link !== '') {
-      setPopupState('popup_opened');
-    } else {
-      setPopupState('');
-    }
-  }, [card.link, card.name]);
 
   return (
-    <div className={`popup popup_type_image ${popupState}`}
+    <div className={`popup popup_type_image ${
+          card.name !== '' && card.link !== '' ? "popup_opened" : ""
+         }`}
          onMouseDown={onOverlayClick}
     >
       <div className="popup__container popup__container_type_image">

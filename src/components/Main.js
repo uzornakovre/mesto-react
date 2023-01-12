@@ -10,7 +10,16 @@ function Main({ onEditProfile,
                 onCardLike,
                 cards }) {
 
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser  = React.useContext(CurrentUserContext);
+  const cardElements = cards.map(card => (
+    <li key={card._id}>
+      <Card card={card}
+            onCardClick={onCardClick}
+            onDeleteClick={onDeleteClick}
+            onCardLike={onCardLike}
+      />
+    </li>
+  ))
 
   return (
     <main className="content">
@@ -39,16 +48,7 @@ function Main({ onEditProfile,
       </section>
       <section className="elements" aria-label="Блок с карточками">
         <ul className="elements__list">
-          {
-            cards.map(card => (
-              <Card card={card}
-                    key={card._id}
-                    onCardClick={onCardClick}
-                    onDeleteClick={onDeleteClick}
-                    onCardLike={onCardLike}
-              />
-            ))
-          }
+          {cardElements}
         </ul>
       </section>
     </main>

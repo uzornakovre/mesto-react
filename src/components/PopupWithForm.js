@@ -9,18 +9,9 @@ function PopupWithForm({ name,
                          isLoading,
                          onOverlayClick,
                          children }) {
-  const [popupState, setPopupState] = React.useState('');
-  
-  React.useEffect(() => {
-    if (isOpen) {
-      setPopupState('popup_opened');
-    } else {
-      setPopupState('');
-    }
-  }, [isOpen]);
 
   return (
-    <div className={`popup popup_type_${name} ${popupState}`}
+    <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}
          onMouseDown={onOverlayClick}
     >
       <div className={`popup__container popup__container_type_${name}`}>

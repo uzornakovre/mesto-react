@@ -23,7 +23,7 @@ function Card({ card,
   }
 
   return (
-    <li className="elements__list-item">
+    <div className="elements__list-item">
       <article className="element">
         <img className="element__image" 
               src={card.link}
@@ -44,7 +44,7 @@ function Card({ card,
       {isOwn && <button className="elements__button-remove elements__button-remove_active"
                         type="button"
                         onClick={handleDeleteClick}></button>}
-    </li>
+    </div>
   )
 }
 
