@@ -209,11 +209,10 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page__content"
-          // tabIndex="0"
-          // onKeyDown={handleEscClick}
-      >
+      <div className="page__content">
+
         <Header />
+
         <Main 
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
@@ -258,6 +257,7 @@ function App() {
                     onClose={closeAllPopups}
                     onOverlayClick={handlePopupOverlayClick}
         />
+        
       </div>
     </CurrentUserContext.Provider>
   );
