@@ -25,4 +25,4 @@ ______
 ------
 ![GitHub repo size](https://img.shields.io/github/repo-size/uzornakovre/mesto-react?color=yellow&style=flat-square) ![GitHub last commit](https://img.shields.io/github/last-commit/uzornakovre/mesto-react?color=blue&style=flat-square) ![GitHub Repo stars](https://img.shields.io/github/stars/uzornakovre/mesto-react?color=pink&style=flat-square)  
 
-[![Скриншот страницы](https://i.ibb.co/ZBQ5VF4/2022-08-31-15-03-41.png)](https://uzornakovre.github.io/mesto-react/)
+[![Скриншот страницы](https://i.ibb.co/4NcjCh1/2023-01-12-04-35-21.jpg)](https://uzornakovre.github.io/mesto-react/)
