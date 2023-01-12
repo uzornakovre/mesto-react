@@ -26,9 +26,9 @@ function Card({ card,
     <div className="elements__list-item">
       <article className="element">
         <img className="element__image" 
-              src={card.link}
-              alt={`Изображение ${card.name}`}
-              onClick={handleClick}
+             src={card.link}
+             alt={`Изображение ${card.name}`}
+             onClick={handleClick}
         />
         <div className="element__caption">
           <h2 className="element__title">{card.name}</h2>

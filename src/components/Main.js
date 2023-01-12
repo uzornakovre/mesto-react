@@ -25,11 +25,11 @@ function Main({ onEditProfile,
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container"
-              onClick={onEditAvatar}
+             onClick={onEditAvatar}
         >
           <img className="profile__avatar"
-                src={currentUser.avatar}
-                alt="Аватар" />
+               src={currentUser.avatar}
+               alt="Аватар" />
         </div>
         <div className="profile__info">
           <h1 className="profile__name">{currentUser.name}</h1>
